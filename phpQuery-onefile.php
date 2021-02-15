@@ -2168,7 +2168,7 @@ class phpQueryObject
 								return null;'),
 						new CallbackParam(), $param
 					);
-				else if (mb_strlen($param) > 1 && $[1] == 'n')
+				else if (mb_strlen($param) > 1 && $param[1] == 'n')
 					// an+b
 					$mapped = $this->map(
 						create_function('$node, $param',
