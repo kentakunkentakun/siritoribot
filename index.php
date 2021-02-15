@@ -1,21 +1,23 @@
 <?php
 
 require_once("./phpQuery-onefile.php");
+require_once __DIR__ . '/vendor/autoload.php';
 
+// アクセストークンを使いCurlHTTPClientをインスタンス化
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
+
+//CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
+
+// LINE Messaging APIがリクエストに付与した署名を取得
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+
+//$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 $html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
 echo phpQuery::newDocument($html)->find(".mw-parser-output")->find('p:first')->text();
-
-/*require './vendor/autoload.php';
-
-// composerのパッケージ一覧から、名前に"helloworld"を含むパッケージを取得
-$htmlStr = file_get_contents("https://packagist.org/search/?q=helloworld");
-
-// htmlテキストをスクレイピングして、h4タグの一覧を取得
-$dom = phpQuery::newDocument($htmlStr);
-$titles = pq($dom)->find("h4");
-
-// 取得したすべてのh4タグタイトルを画面に出力
-foreach( $titles as $title ) {
-    echo trim( pq($title)->text() ) . "\n";
-}
+$json_string = file_get_contents('php://input');
+$json_object = json_decode($json_string);
+error_log(var_dump($json_object, true), 3, './debug.log');
+echo 8888;
+var_dump($json_object);
