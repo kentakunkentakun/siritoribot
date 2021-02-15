@@ -22,6 +22,6 @@ $json_object = json_decode($json_string);
 foreach ($events as $event) {
     // メッセージを返信
     $response = $bot->replyMessage(
-        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json_object)  
+        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("hhh")  
     );
 }
