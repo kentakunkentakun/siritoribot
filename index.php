@@ -18,6 +18,9 @@ $html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%B
 echo phpQuery::newDocument($html)->find(".mw-parser-output")->find('p:first')->text();
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
-error_log(var_dump($json_object, true), 3, './debug.log');
-echo 8888;
-var_dump($json_object);
+foreach ($events as $event) {
+    // メッセージを返信
+    $response = $bot->replyMessage(
+        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($json_object)  
+    );
+}
