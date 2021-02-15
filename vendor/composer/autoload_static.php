@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitedcef76c5fd523cb0c77a01380a0e848
 {
+    public static $prefixLengthsPsr4 = array (
+        'L' => 
+        array (
+            'LINE\\' => 5,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'LINE\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/linecorp/line-bot-sdk/src',
+        ),
+    );
+
     public static $classMap = array (
         'Callback' => __DIR__ . '/..' . '/electrolinux/phpquery/phpQuery/phpQuery/Callback.php',
         'CallbackBody' => __DIR__ . '/..' . '/electrolinux/phpquery/phpQuery/phpQuery/Callback.php',
@@ -32,6 +46,8 @@ class ComposerStaticInitedcef76c5fd523cb0c77a01380a0e848
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitedcef76c5fd523cb0c77a01380a0e848::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitedcef76c5fd523cb0c77a01380a0e848::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitedcef76c5fd523cb0c77a01380a0e848::$classMap;
 
         }, null, ClassLoader::class);
