@@ -17,10 +17,9 @@ $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
 echo phpQuery::newDocument($html)->find(".mw-parser-output")->find('p:first')->text();*/
-$json_object = json_decode($events);
 foreach ($events as $event) {
     // メッセージを返信
     $response = $bot->replyMessage(
-        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(json_decode($events))  
+        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event)  
     );
 }
