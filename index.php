@@ -22,10 +22,10 @@ echo $contents;*/
 //echo textChecker('昔');
 $html = file_get_contents("https://www.weblio.jp/content/昔");
 $contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp')->find("h2"));
-$contents = phpQuery::newDocument($html)->find('.kijiWrp');
+$contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
 echo $contents;
 for($i = 0; $i < $contentsNum; $i++){
-    echo $contents->find("h2:".$i.")")->text();
+    echo $contents->find("h2:eq(".$i.")")->text();
 }
 echo '777';
 //$userId = $events->getUserId();
