@@ -19,7 +19,7 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 $html = file_get_contents("https://www.weblio.jp/content/" . $text);
 $contents = phpQuery::newDocument($html)->find(".midashigo")->text();
 echo $contents;*/
-echo extChecker('昔');
+echo textChecker('昔');
 //$userId = $events->getUserId();
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
