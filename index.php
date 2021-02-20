@@ -20,13 +20,14 @@ $html = file_get_contents("https://www.weblio.jp/content/" . $text);
 $contents = phpQuery::newDocument($html)->find(".midashigo")->text();
 echo $contents;*/
 //echo textChecker('昔');
-$html = file_get_contents("https://www.weblio.jp/content/" . $text);
-        $contents = phpQuery::newDocument($html)->find('.kijiWrp')->find(".midashigo");
-        echo $contents;
-        foreach($contents as $content){
-           echo pq($content)->text();
-        }
-        echo '777';
+$html = file_get_contents("https://www.weblio.jp/content/昔");
+$contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp')->find(".midashigo"));
+$contents = phpQuery::newDocument($html)->find('.kijiWrp');
+echo $contents;
+for($i = 0; $i < $contentsNum; $i++){
+    echo $contents->find(".midashigo:".$i.")")->text();
+}
+echo '777';
 //$userId = $events->getUserId();
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
