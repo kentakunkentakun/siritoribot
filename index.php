@@ -11,7 +11,8 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-//$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+//$events = $bot->parseE
+ventRequest(file_get_contents('php://input'), $signature);
 
 //$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 //$text = $events->getText();
@@ -25,6 +26,7 @@ $html = file_get_contents("https://www.weblio.jp/content/" . $text);
         foreach($contents as $content){
            echo pq($content)->text();
         }
+        echo '777';
 //$userId = $events->getUserId();
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
