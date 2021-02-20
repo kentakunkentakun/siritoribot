@@ -19,14 +19,8 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 $html = file_get_contents("https://www.weblio.jp/content/" . $text);
 $contents = phpQuery::newDocument($html)->find(".midashigo")->text();
 echo $contents;*/
-//echo textChecker('昔');
-$html = file_get_contents("https://www.weblio.jp/content/昔");
-$contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp:eq(0)')->find("h2"));
-$contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
-for($i = 0; $i < $contentsNum; $i++){
-    echo $contents->find("h2:eq(".$i.")")->text();
-}
-echo '777';
+textChecker('昔');
+
 //$userId = $events->getUserId();
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
