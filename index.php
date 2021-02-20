@@ -22,6 +22,7 @@ echo $contents;*/
 //echo textChecker('昔');
 $html = file_get_contents("https://www.weblio.jp/content/" . $text);
         $contents = phpQuery::newDocument($html)->find('.kijiWrp')->find(".midashigo");
+        echo $contents;
         foreach($contents as $content){
            echo pq($content)->text();
         }
