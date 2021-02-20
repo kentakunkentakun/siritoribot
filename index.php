@@ -1,6 +1,6 @@
 <?php
 
-require_once("./phpQuery-onefile.php");
+require_once("./sukure.php");
 require_once __DIR__ . '/vendor/autoload.php';
 
 // アクセストークンを使いCurlHTTPClientをインスタンス化
