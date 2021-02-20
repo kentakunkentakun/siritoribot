@@ -23,7 +23,7 @@ echo $contents;*/
 $html = file_get_contents("https://www.weblio.jp/content/" . $text);
         $contents = phpQuery::newDocument($html)->find('.kijiWrp')->find(".midashigo");
         foreach($contents as $content){
-           echo $content->text();
+           echo pq($content)->text();
         }
 //$userId = $events->getUserId();
 /*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
