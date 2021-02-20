@@ -21,7 +21,7 @@ $contents = phpQuery::newDocument($html)->find(".midashigo")->text();
 echo $contents;*/
 //echo textChecker('昔');
 $html = file_get_contents("https://www.weblio.jp/content/昔");
-$contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp')->find("h2"));
+$contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp:eq(0)')->find("h2"));
 $contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
 echo $contents;
 for($i = 0; $i < $contentsNum; $i++){
