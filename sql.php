@@ -1,7 +1,16 @@
 <?php
 $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
-$pdo = new PDO($dsn, $url['user'], $url['pass']);
+try {
+    $pdo = new PDO($dsn, $url['user'], $url['pass']);
+    
+} catch (PDOException $e) {
+
+    $error = $e->getMessage();
+
+}
+
+
 function prWord($userId){
     $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userId = ? ORDER BY id DESC  FETCH FIRST 1 ROWS ONLY");
     $stmt->execute([$userId]);
