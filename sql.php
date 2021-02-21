@@ -23,6 +23,7 @@ function insert($hurigana, $text, $userId, $gobi){
     $sql = "INSERT INTO siritori (hurigana, userId, word, gobi) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$hurigana, $text, $userId, $gobi]);
+    print_r($pdo -> errorInfo());
 }
 //重複確認
 function duplicate($userId, $ftext){
