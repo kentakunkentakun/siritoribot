@@ -13,7 +13,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 echo textChecker('昔', 'む');
-echo $html = file_get_contents("https://www.weblio.jp/content/".$text);
+echo $html = "https://www.weblio.jp/content/".$text;
 /*$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
 foreach ($events as $event) {
