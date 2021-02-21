@@ -29,7 +29,7 @@ foreach ($events as $event) {
             $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('ではしりとりの「り」からお願いします！')
         );
     }else if($text == 'しりとり終了'){//しりとり終了
-        reset($userId);
+        resets($userId);
         $response = $bot->replyMessage(
             $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('お疲れ様でした！')
         );
