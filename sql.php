@@ -44,3 +44,14 @@ function duplicate($userId, $ftext){
         return false;
     }
 }
+
+function initialize($userId){
+    $url = parse_url(getenv('DATABASE_URL'));
+    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+    $pdo = new PDO($dsn, $url['user'], $url['pass']);
+    $stmt = $pdo->prepare("DELETE FROM siritori WHERE userId = ?");
+    $stmt->execute([$userId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $reset = $pdo->prepare("INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (しりとり, しりとり, ?, り)");
+    $reset->execute([$userId]);
+}
