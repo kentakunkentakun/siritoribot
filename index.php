@@ -8,7 +8,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
 //CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
@@ -44,13 +44,13 @@ foreach ($events as $event) {
             $ftext = ftext($content);
             if(duplicate($userId,$ftext)){
                 //正しい
-                $response = $bot->replyMessage(
+                /*$response = $bot->replyMessage(
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('正しい')
-                );
+                );*/
                 $gobi = mb_substr($ftext, -1, 1);
-                $response = $bot->replyMessage(
+                /*$response = $bot->replyMessage(
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gobi)
-                );
+                );*/
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
                 $last = mb_substr($content, -1,1);
