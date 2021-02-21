@@ -35,7 +35,7 @@ foreach ($events as $event) {
         );
     }else if(!checkPlay($userId)){
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('しりとりを開始する場合は「しりとり始め」と、\nしりとりを終了する場合は「しりとり終了」と打ってください!')
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('しりとりを開始する場合は「しりとり始め」と、しりとりを終了する場合は「しりとり終了」と打ってください!')
         );
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
@@ -44,13 +44,7 @@ foreach ($events as $event) {
             $ftext = ftext($content);
             if(duplicate($userId,$ftext)){
                 //正しい
-                /*$response = $bot->replyMessage(
-                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('正しい')
-                );*/
                 $gobi = mb_substr($ftext, -1, 1);
-                /*$response = $bot->replyMessage(
-                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gobi)
-                );*/
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
                 $last = mb_substr($replyMes, -1,1);
