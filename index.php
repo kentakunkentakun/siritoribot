@@ -9,13 +9,11 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 
 //CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
-$str = "おお・い〔おほい〕【多い】";
-$result = preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY);
-var_dump($result);
+
 // LINE Messaging APIがリクエストに付与した署名を取得
 /*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);*/
-
+echo mb_strpos('おお・い〔おほい〕【多い】', '〔');
 /*foreach ($events as $event) {
     $text = $event->getText();
     $userId = $event->getUserId();
@@ -41,6 +39,7 @@ $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
         $content = textChecker($text, $preword);
         $reply;
         if($content!=""){
+
             $ftext = mb_substr($content,0,mb_strpos($text, '【'));
             if(duplicate($userId,$content)){
                 //正しい
