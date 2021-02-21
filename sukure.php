@@ -16,6 +16,7 @@
         return "";
     }
     function replyMes($userId, $gobi){
-        $html = file_get_contents("https://www.shiritori-tango.net/ki-kara-kotoba/");
+        $num = mt_rand(0, 100);
+        $html = file_get_contents("https://www.weblio.jp/content_find/prefix/". $num . "/" . $gobi);
         echo $html;
     }
