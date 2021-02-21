@@ -16,8 +16,8 @@ function prWord($userId){
     $url = parse_url(getenv('DATABASE_URL'));
     $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
-    $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userid = kentakunkentakun ORDER BY id DESC ");
-    $stmt->execute([$userId]);
+    $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userid = \'kentakunkentakun\' ORDER BY id DESC ");
+    $stmt->execute();
     $result = $stmt->fetch();
     return $stmt;
 }
