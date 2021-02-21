@@ -18,7 +18,7 @@ function prWord($userId){
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $stmt = $pdo->prepare("SELECT * FROM siritori"/* WHERE userid = kentakunkentakun ORDER BY id DESC "*/);
     $stmt->execute();
-    $result = $stmt->fetch();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
 function insert($hurigana, $text, $userId, $gobi){
