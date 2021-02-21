@@ -12,7 +12,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-if(duplicate('kentakunkentakun', 'ふりがな')) echo '77';
+if(duplicate('kentakunkentakun', 'ふりな')) echo '77';
 else echo 'h11';
 /*$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
