@@ -6,7 +6,7 @@ try {
     
 } catch (PDOException $e) {
 
-    $error = $e->getMessage();
+    echo $error = $e->getMessage();
 
 }
 
