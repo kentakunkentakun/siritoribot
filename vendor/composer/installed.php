@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '607f2bcfc34e65e806a6f4bf5fef3ae3d6533a24',
+    'reference' => '6a8080c4f75f10362b8d9440f6fbb099a7a8053b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '607f2bcfc34e65e806a6f4bf5fef3ae3d6533a24',
+      'reference' => '6a8080c4f75f10362b8d9440f6fbb099a7a8053b',
     ),
     'electrolinux/phpquery' => 
     array (
