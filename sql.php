@@ -38,12 +38,16 @@ function initialize($userId){
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $reset = $pdo->prepare("INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (?, ?, ?, ?)");
     $reset->execute(['しりとり', 'しりとり', $userId, 'り']);
+    $reset = $pdo->prepare("INSERT INTO playing (userid) VALUES (?)");
+    $reset->execute([$userId]);
 }
 function resets($userId){
     $url = parse_url(getenv('DATABASE_URL'));
     $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $stmt = $pdo->prepare("DELETE FROM siritori WHERE userId = ?");
+    $stmt->execute([$userId]);
+    $stmt = $pdo->prepare("DELETE FROM playing WHERE userId = ?");
     $stmt->execute([$userId]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 }

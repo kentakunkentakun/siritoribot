@@ -9,40 +9,46 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 
 //CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
-if(checkPlay('kentakunkentakun')){
-    echo 'ok';
-}else{
-    echo 'hh';
-}
+replyMes('hh','hh');
 // LINE Messaging APIがリクエストに付与した署名を取得
 /*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);*/
 
-foreach ($events as $event) {
+/*foreach ($events as $event) {
     $text = $event->getText();
     $userId = $event->getUserId();
 
     if($text == 'しりとり始め'){//しりとり開始
-        if()
+        if(checkPlay($userId)){
+            $response = $bot->replyMessage(
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('しりとり中です！')
+            );
+            continue;
+        }
         initialize($userId);
         $response = $bot->replyMessage(
             $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('ではしりとりの「り」からお願いします！')
         );
-    }else if($text == 'しりとり終了'){//しりとりのつづき
+    }else if($text == 'しりとり終了'){//しりとり終了
         reset($userId);
         $response = $bot->replyMessage(
             $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('お疲れ様でした！')
         );
-    }else{//しりとり終了
+    }else{//しりとり中
         $preword = prword($userId);
         $content = textChecker($text, $preword);
         $reply;
         if($content!=""){
-            $ftext = mb_substr($content,0,strpos($text, '【'));
+            $ftext = mb_substr($content,0,mb_strpos($text, '【'));
             if(duplicate($userId,$content)){
                 //正しい
-
-                insert($ftext, $content, $userId, substr($content, mb_strpos($text, '【')-1, 1));
+                $gobi = mb_substr($content, mb_strpos($text, '【')-1, 1);
+                insert($ftext, $content, $userId, $gobi);
+                $replyMes = replyMes($userId, $gobi);
+                
+                $response = $bot->replyMessage(
+                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMes);
+                );
 
             }else{
                 $response = $bot->replyMessage(

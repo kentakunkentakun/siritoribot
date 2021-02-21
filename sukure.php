@@ -15,3 +15,7 @@
         }
         return "";
     }
+    function replyMes($userId, $gobi){
+        $html = file_get_contents("https://しりとり.net/「ず」からはじまる言葉");
+        echo $html;
+    }
