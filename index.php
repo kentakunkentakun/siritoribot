@@ -23,7 +23,7 @@ $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto");
 $contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
 for($i = 0; $i < $contentsNum; $i++){
     $content = $contents->find("h2:eq(".$i.")")->text();
-    echo substr($content,0,1);
+    echo mb_substr($content,0,1);
     if(substr($content,0,1) == $kasira){
         echo $content;
     }
