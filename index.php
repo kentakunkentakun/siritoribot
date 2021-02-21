@@ -53,8 +53,8 @@ foreach ($events as $event) {
                 );*/
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
-                $last = mb_substr($content, -1,1);
-                $reply = '私は「'. $replyMes .'」です。\n「'.$last.'」からお願いします!';
+                $last = mb_substr($replyMes, -1,1);
+                $reply = '私は「'. $replyMes .'」です。「'.$last.'」からお願いします!';
                 $response = $bot->replyMessage(
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply)
                 );
