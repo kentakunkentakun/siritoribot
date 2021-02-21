@@ -39,7 +39,7 @@ function initialize($userId){
     $reset = $pdo->prepare("INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (?, ?, ?, ?)");
     $reset->execute(['しりとり', 'しりとり', $userId, 'り']);
 }
-function reset($userId){
+function resets($userId){
     $url = parse_url(getenv('DATABASE_URL'));
     $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
