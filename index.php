@@ -64,7 +64,7 @@ foreach ($events as $event) {
         }else{
             //そんな単語存在しません
             $response = $bot->replyMessage(
-                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('単語が見つかりませんでした..別の単語にしてください。')  
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('単語が見つかりませんでした..ひらがなにしたり、別の単語に変えてください。')  
             );
         }
     } 
