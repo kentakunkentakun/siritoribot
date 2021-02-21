@@ -19,7 +19,7 @@ function prWord($userId){
     $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userid = ? ORDER BY id DESC ");
     $stmt->execute([$userId]);
     $result = $stmt->fetch();
-    return $result;
+    return $stmt;
 }
 function insert($hurigana, $text, $userId, $gobi){
     $url = parse_url(getenv('DATABASE_URL'));
