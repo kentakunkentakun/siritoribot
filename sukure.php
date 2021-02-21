@@ -25,7 +25,7 @@
             $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
             if(mb_substr($content, -1,1) != 'ん') break;
         }
-        insert($content, $content, $userId, mb_substr($content, -1,1));
+        //insert($content, $content, $userId, mb_substr($content, -1,1));
         return $content;
     }
     function ftext($text){

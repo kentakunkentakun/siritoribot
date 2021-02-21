@@ -11,7 +11,8 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
 
 // LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+echo replyMes('uu','は');
+/*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 foreach ($events as $event) {
     $text = $event->getText();
@@ -48,6 +49,9 @@ foreach ($events as $event) {
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('正しい')
                 );
                 $gobi = mb_substr($ftext, -1, 1);
+                $response = $bot->replyMessage(
+                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($gobi)
+                );
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
                 $last = mb_substr($content, -1,1);
@@ -67,4 +71,4 @@ foreach ($events as $event) {
             );
         }
     } 
-}
+}*/
