@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'abc4740c4971a02c3fe99b80faf2b4a9f9d23d83',
+    'reference' => '607f2bcfc34e65e806a6f4bf5fef3ae3d6533a24',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'abc4740c4971a02c3fe99b80faf2b4a9f9d23d83',
+      'reference' => '607f2bcfc34e65e806a6f4bf5fef3ae3d6533a24',
     ),
     'electrolinux/phpquery' => 
     array (
