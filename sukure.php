@@ -16,14 +16,24 @@
         return "";
     }
     function replyMes($userId, $gobi){
-        $num = mt_rand(0, 100);
-        $html = file_get_contents("https://www.weblio.jp/content_find/prefix/". $num . "/" . $gobi);
-        echo $html;
+        $content;
+        while(1){
+            $num = mt_rand(0, 100);
+            $num2 = cntFdWrp(0,9);
+            $html = file_get_contents("https://www.weblio.jp/content_find/prefix/". $num . "/" . $gobi);
+            $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
+            $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
+            if(mb_substr($content, -1,1) != 'ん') break;
+        }
+        insert($content, $content, $userId, mb_substr($content, -1,1));
+        return $content;
     }
     function ftext($text){
         if(mb_strpos($text, '〔') != false){
             return mb_substr($text,0,mb_strpos($text, '〔'));
-        }else{
+        }else if(mb_strpos($text, '【') != false){
             return mb_substr($text,0,mb_strpos($text, '【'));
+        }else{
+            return $text;
         }
     }

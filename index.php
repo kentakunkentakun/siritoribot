@@ -11,10 +11,9 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
 
 // LINE Messaging APIがリクエストに付与した署名を取得
-/*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);*/
-echo ftext('おお・い〔おほい〕【多い】');
-/*foreach ($events as $event) {
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+foreach ($events as $event) {
     $text = $event->getText();
     $userId = $event->getUserId();
 
@@ -34,24 +33,25 @@ echo ftext('おお・い〔おほい〕【多い】');
         $response = $bot->replyMessage(
             $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('お疲れ様でした！')
         );
+    }else if(!checkPlay($userId)){
+        $response = $bot->replyMessage(
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('しりとりを開始する場合は「しりとり始め」と、\nしりとりを終了する場合は「しりとり終了」と打ってください!')
+        );
     }else{//しりとり中
-        $preword = prword($userId);
-        $content = textChecker($text, $preword);
-        $reply;
+        $preword = prword($userId);// 次の頭文字
+        $content = textChecker($text, $preword);//正しい単語か
         if($content!=""){
-
-            $ftext = mb_substr($content,0,mb_strpos($text, '【'));
-
-            if(duplicate($userId,$content)){
+            $ftext = ftext($content);
+            if(duplicate($userId,$ftext)){
                 //正しい
-                $gobi = mb_substr($content, mb_strpos($text, '【')-1, 1);
+                $gobi = mb_substr($ftext, -1, 1);
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
-                
+                $last = mb_substr($content, -1,1);
+                $reply = '私は「'. $replyMes .'」です。\n「'.$last.'」からお願いします!';
                 $response = $bot->replyMessage(
-                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMes);
+                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply)
                 );
-
             }else{
                 $response = $bot->replyMessage(
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('既に使われた単語です！')
@@ -64,4 +64,4 @@ echo ftext('おお・い〔おほい〕【多い】');
             );
         }
     } 
-}*/
+}
