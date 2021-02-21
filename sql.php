@@ -25,7 +25,7 @@ function insert($hurigana, $text, $userId, $gobi){
     $url = parse_url(getenv('DATABASE_URL'));
     $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
-    $sql = "INSERT INTO siritori (hurigana, userId, word, gobi) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$hurigana, $text, $userId, $gobi]);
     var_dump($pdo -> errorInfo());
