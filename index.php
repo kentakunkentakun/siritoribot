@@ -1,6 +1,7 @@
 <?php
 
 require_once("./sukure.php");
+require_once("./sql.php");
 require_once __DIR__ . '/vendor/autoload.php';
 
 // アクセストークンを使いCurlHTTPClientをインスタンス化
@@ -11,23 +12,42 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-//$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+echo textChecker(昔, む);
+/*$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
-//$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-//$text = $events->getText();
-/*$text="昔";
-$html = file_get_contents("https://www.weblio.jp/content/" . $text);
-$contents = phpQuery::newDocument($html)->find(".midashigo")->text();
-echo $contents;*/
-textChecker('昔');
+foreach ($events as $event) {
+    {//しりとり開始
 
-//$userId = $events->getUserId();
-/*$html = file_get_contents("https://ja.wikipedia.org/wiki/%E4%B8%89%E5%9B%BD%E5%BF%97");
 
-echo phpQuery::newDocument($html)->find(".mw-parser-output")->find('p:first')->text();*/
-/*foreach ($events as $event) {
-    // メッセージを返信
-    $response = $bot->replyMessage(
-        $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($event)  
-    );
-}*/
+
+    }
+    {//しりとりのつづき
+        $text = $event->getText();
+        $userId = $event->getUserId();
+        $preword = prword($userId);
+        $content = textChecker($text, $preword);
+        $reply;
+        if($content!=""){
+            $ftext = substr($content,0,strpos($text, '【'));
+            if(duplicate($userId,$ftext)){
+                //正しい
+
+                insert($ftext, $content, $userId, substr($content, strpos($text, '【')-1, 1));
+
+            }else{
+                $response = $bot->replyMessage(
+                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('既に使われた単語です！')
+                );
+            }
+        }else{
+            //そんな単語存在しません
+            $response = $bot->replyMessage(
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('単語が見つかりませんでした..別の単語にしてください。')  
+            );
+        }
+    }
+    {//しりとり終了
+
+    }
+    
+}
