@@ -1,6 +1,5 @@
 <?php
-$url = parse_url(getenv('DATABASE_URL'));
-$dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+
 
 
 /*try {
@@ -14,6 +13,8 @@ $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1))
 
 
 function prWord($userId){
+    $url = parse_url(getenv('DATABASE_URL'));
+    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userId = ? ORDER BY id DESC  FETCH FIRST 1 ROWS ONLY");
     $stmt->execute([$userId]);
@@ -21,6 +22,8 @@ function prWord($userId){
     return $result->gobi;
 }
 function insert($hurigana, $text, $userId, $gobi){
+    $url = parse_url(getenv('DATABASE_URL'));
+    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $sql = "INSERT INTO siritori (hurigana, userId, word, gobi) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
@@ -29,6 +32,8 @@ function insert($hurigana, $text, $userId, $gobi){
 }
 //重複確認
 function duplicate($userId, $ftext){
+    $url = parse_url(getenv('DATABASE_URL'));
+    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
     $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userId = ? AND hurigana = ? ORDER BY id DESC  FETCH FIRST 1 ROWS ONLY");
     $stmt->execute([$userId, $ftext]);
