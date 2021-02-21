@@ -25,9 +25,9 @@
             $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
             $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
             $checkStr = mb_substr($content, -1,1);
-            if(preg_match('/^[ぁ-を]$/',$checkStr)){
+            /*if(preg_match('/^[ぁ-を]$/',$checkStr)){
                 break;
-            }
+            }*/
         }
         //insert($content, $content, $userId, mb_substr($content, -1,1));
         return $content;
