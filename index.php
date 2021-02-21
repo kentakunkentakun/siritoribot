@@ -13,6 +13,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 // LINE Messaging APIがリクエストに付与した署名を取得
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 echo textChecker('昔', 'む');
+insert('ふりがな', 'hurigana', 'kentakunkentakun', 'な');
 /*$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
 foreach ($events as $event) {
@@ -28,11 +29,11 @@ foreach ($events as $event) {
         $content = textChecker($text, $preword);
         $reply;
         if($content!=""){
-            $ftext = substr($content,0,strpos($text, '【'));
+            $ftext = mb_substr($content,0,strpos($text, '【'));
             if(duplicate($userId,$ftext)){
                 //正しい
 
-                insert($ftext, $content, $userId, substr($content, strpos($text, '【')-1, 1));
+                insert($ftext, $content, $userId, substr($content, mb_strpos($text, '【')-1, 1));
 
             }else{
                 $response = $bot->replyMessage(
