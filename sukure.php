@@ -18,19 +18,13 @@
     function replyMes($userId, $gobi){
         $content;
         $checkStr;
-        while(1){
-            $num = mt_rand(0, 100);
-            $num2 = mt_rand(0,9);
-            $html = file_get_contents("https://www.weblio.jp/content_find/prefix/". $num . "/" . $gobi);
+            $html = file_get_contents("https://しりとり.net/「" . $gobi . "」からはじまる言葉/");
             $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
             $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
             $checkStr = mb_substr($content, -1,1);
-            if(preg_match('/^[ぁ-を]$/',$checkStr)){
-                break;
-            }
-        }
+
         //insert($content, $content, $userId, mb_substr($content, -1,1));
-        return $content;
+        return $html;
         //return $checkStr;
     }
     function ftext($text){
