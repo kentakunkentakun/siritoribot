@@ -41,12 +41,12 @@ foreach ($events as $event) {
         $preword = prword($userId);// 次の頭文字
         $content = textChecker($text, $preword);//正しい単語か
         if($content!=""){
-            $response = $bot->replyMessage(
-                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('正しい')
-            );
             $ftext = ftext($content);
             if(duplicate($userId,$ftext)){
                 //正しい
+                $response = $bot->replyMessage(
+                    $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('正しい')
+                );
                 $gobi = mb_substr($ftext, -1, 1);
                 insert($ftext, $content, $userId, $gobi);
                 $replyMes = replyMes($userId, $gobi);
