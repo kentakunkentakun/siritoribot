@@ -9,7 +9,9 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 
 //CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f459b5fe5bd65']);
-replyMes('hh','は');
+$str = "abcdeあい う　えお";
+$result = preg_split("//u", $str, -1, PREG_SPLIT_NO_EMPTY);
+var_dump($result);
 // LINE Messaging APIがリクエストに付与した署名を取得
 /*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);*/
@@ -21,7 +23,7 @@ $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
     if($text == 'しりとり始め'){//しりとり開始
         if(checkPlay($userId)){
             $response = $bot->replyMessage(
-                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('しりとり中です！')
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('既にしりとり中ですよ！')
             );
             continue;
         }

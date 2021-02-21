@@ -19,12 +19,12 @@ function insert($hurigana, $text, $userId, $gobi){
     var_dump($pdo -> errorInfo());
 }
 //重複確認
-function duplicate($userId, $content){
+function duplicate($userId, $ftext){
     $url = parse_url(getenv('DATABASE_URL'));
     $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
     $pdo = new PDO($dsn, $url['user'], $url['pass']);
-    $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userId = ? AND word = ? ORDER BY id DESC ");
-    $stmt->execute([$userId, $content]);
+    $stmt = $pdo->prepare("SELECT * FROM siritori WHERE userId = ? AND hurigana = ? ORDER BY id DESC ");
+    $stmt->execute([$userId, $ftext]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if(empty($result)){
         return true;
