@@ -13,7 +13,7 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 // LINE Messaging APIがリクエストに付与した署名を取得
 /*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);*/
-echo gettype(mb_strpos('おお・いおほい【多い】', '〔'));
+echo ftext('おお・い〔おほい〕【多い】');
 /*foreach ($events as $event) {
     $text = $event->getText();
     $userId = $event->getUserId();
@@ -41,6 +41,7 @@ echo gettype(mb_strpos('おお・いおほい【多い】', '〔'));
         if($content!=""){
 
             $ftext = mb_substr($content,0,mb_strpos($text, '【'));
+
             if(duplicate($userId,$content)){
                 //正しい
                 $gobi = mb_substr($content, mb_strpos($text, '【')-1, 1);
