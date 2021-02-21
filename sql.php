@@ -1,14 +1,15 @@
 <?php
 $url = parse_url(getenv('DATABASE_URL'));
 $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
-try {
-    $pdo = new PDO($dsn, $url['user'], $url['pass']);
+$pdo = new PDO($dsn, $url['user'], $url['pass']);
+/*try {
+    
     
 } catch (PDOException $e) {
 
     echo $error = $e->getMessage();
 
-}
+}*/
 
 
 function prWord($userId){
