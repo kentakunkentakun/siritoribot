@@ -17,6 +17,7 @@
     }
     function replyMes($userId, $gobi){
         $content;
+        $checkStr;
         while(1){
             $num = mt_rand(0, 100);
             $num2 = mt_rand(0,9);
@@ -24,15 +25,14 @@
             $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
             $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
             $checkStr = mb_substr($content, -1,1);
-            $response = $bot->replyMessage(
-                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkStr)
-            );
+            break;
             if(preg_match('/^[ぁ-を]$/',$checkStr)){
                 break;
             } 
         }
         //insert($content, $content, $userId, mb_substr($content, -1,1));
-        return $content;
+        //return $content;
+        return $checkStr;
     }
     function ftext($text){
         if(mb_strpos($text, '〔') != false){
