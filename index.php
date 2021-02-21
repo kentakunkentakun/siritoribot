@@ -15,9 +15,9 @@ $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATUR
 echo textChecker('昔', 'む');
 $text = '昔';
 $kasira = 'む';
-//echo $html = file_get_contents("https://www.weblio.jp/content/".$text);
+$html = file_get_contents("https://www.weblio.jp/content/".$text);
 
-//echo $contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp:eq(0)')->find("h2"));
+$contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp:eq(0)')->find("h2"));
 echo $contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
 for($i = 0; $i < $contentsNum; $i++){
     $content = $contents->find("h2:eq(".$i.")")->text();
