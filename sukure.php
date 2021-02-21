@@ -24,6 +24,9 @@
             $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
             $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
             $checkStr = mb_substr($content, -1,1);
+            $response = $bot->replyMessage(
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($checkStr)
+            );
             if(preg_match('/^[ぁ-を]$/',$checkStr)){
                 break;
             } 
