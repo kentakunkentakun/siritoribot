@@ -21,7 +21,7 @@
         echo $html;
     }
     function ftext($text){
-        if(mb_strpos($text, '〔') == false){
+        if(mb_strpos($text, '〔') != false){
             return mb_substr($text,0,mb_strpos($text, '〔'));
         }else{
             return mb_substr($text,0,mb_strpos($text, '【'));
