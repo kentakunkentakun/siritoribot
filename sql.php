@@ -52,6 +52,6 @@ function initialize($userId){
     $stmt = $pdo->prepare("DELETE FROM siritori WHERE userId = ?");
     $stmt->execute([$userId]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $reset = $pdo->prepare("INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (しりとり, しりとり, ?, り)");
-    $reset->execute([$userId]);
+    $reset = $pdo->prepare("INSERT INTO siritori (hurigana, word, userid, gobi) VALUES (?, ?, ?, ?)");
+    $reset->execute(['しりとり', 'しりとり', $userId, 'り']);
 }
