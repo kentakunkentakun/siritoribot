@@ -14,10 +14,17 @@ $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '937bf98973bbd864910f4
 $signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 echo textChecker('昔', 'む');
 $text = '昔';
+$kasira = 'む';
 echo $html = file_get_contents("https://www.weblio.jp/content/".$text);
 
 echo $contentsNum = count(phpQuery::newDocument($html)->find('.kijiWrp:eq(0)')->find("h2"));
 echo $contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
+for($i = 0; $i < $contentsNum; $i++){
+    $content = $contents->find("h2:eq(".$i.")")->text();
+    if(substr($content,0,1)===$kasira){
+        echo $content;
+    }
+}
 /*$events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 
 foreach ($events as $event) {
