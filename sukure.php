@@ -16,6 +16,6 @@
         return "";
     }
     function replyMes($userId, $gobi){
-        $html = file_get_contents("https://しりとり.net/「ず」からはじまる言葉");
+        $html = file_get_contents("https://www.shiritori-tango.net/ki-kara-kotoba/");
         echo $html;
     }
