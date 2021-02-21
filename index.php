@@ -40,7 +40,11 @@ foreach ($events as $event) {
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
         $content = textChecker($text, $preword);//正しい単語か
-        if($content!=""){
+        if(mb_substr($text, -1,1)=='ん'){
+            $response = $bot->replyMessage(
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('「ん」で終わってますよ!')
+            );
+        }else if($content!=""){
             $ftext = ftext($content);
             if(duplicate($userId,$ftext)){
                 //正しい
