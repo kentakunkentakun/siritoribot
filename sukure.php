@@ -9,7 +9,7 @@
         $contents = phpQuery::newDocument($html)->find('.kijiWrp:eq(0)');
         for($i = 0; $i < $contentsNum; $i++){
             $content = $contents->find("h2:eq(".$i.")")->text();
-            if(mb_substr($content,0,1)==$kasira){
+            if(mb_convert_kana(mb_substr($content,0,1), "c")==$kasira){
                 return $content;
             }
         }
