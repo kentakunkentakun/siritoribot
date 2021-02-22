@@ -37,11 +37,11 @@ foreach ($events as $event) {
         $results = result($userId);
         $reply = "";
         foreach($results as $result){
-            $reply .= $result['hurigana']. "\n->";
+            $reply .= "->" .$result['hurigana']. "\n";
         }
         resets($userId);
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果->\n". $reply)
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果\nしりとり". $reply)
         );
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
