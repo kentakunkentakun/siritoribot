@@ -11,7 +11,7 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 var_dump(result('U4cf5f0d35714875e04f2546295684863'));
 // LINE Messaging APIがリクエストに付与した署名を取得
-/*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 foreach ($events as $event) {
     $text = $event->getText();
@@ -30,12 +30,18 @@ foreach ($events as $event) {
         );
     }else if(!checkPlay($userId)){
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('セルフしりとりを開始する場合は「しりとり始め」と、しりとりを終了する場合は「しりとり終了」と打ってください!')
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("セルフしりとりを開始する場合は「しりとり始め」と、\nしりとりを終了する場合は「しりとり終了」と打ってください!")
         );
     }else if($text == 'しりとり終了'){//しりとり終了
+        
+        $results = result($userId);
+        $reply = "";
+        foreach($results as $result){
+            $reply .= $result['hurigana']. "\n->";
+        }
         resets($userId);
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('お疲れ様でした！')
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果")
         );
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
@@ -70,4 +76,4 @@ foreach ($events as $event) {
             );
         }
     } 
-}*/
+}
