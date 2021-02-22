@@ -15,18 +15,7 @@
         }
         return "";
     }
-    function replyMes($userId, $gobi){
-        $content;
-        $checkStr;
-        $html = file_get_contents("https://しりとり.net/「" . $gobi . "」からはじまる言葉/");
-        $html = mb_convert_encoding($html, "HTML-ENTITIES", "auto"); 
-        $content = phpQuery::newDocument($html)->find('#cntFdWrp')->find(".cntFdHead:eq(". $num2 .")")->find('.cntFdMidashi')->text();
-        $checkStr = mb_substr($content, -1,1);
-
-        //insert($content, $content, $userId, mb_substr($content, -1,1));
-        return $html;
-        //return $checkStr;
-    }
+    
     function ftext($text){
         if(mb_strpos($text, '〔') != false){
             return mb_substr($text,0,mb_strpos($text, '〔'));
