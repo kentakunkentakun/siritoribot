@@ -39,7 +39,7 @@ foreach ($events as $event) {
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
         $content = textChecker($text, $preword);//正しい単語か
-        if(mb_substr($text, -1,1)=='ん'){
+        if(mb_convert_kana(mb_substr($text, -1,1), "c") == 'ん'){
             $response = $bot->replyMessage(
                 $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('「ん」で終わってますよ!')
             );
