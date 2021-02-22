@@ -47,7 +47,7 @@ foreach ($events as $event) {
             $ftext = ftext($content);
             if(duplicate($userId,$ftext)){
                 //正しい
-                $gobi = mb_substr($ftext, -1, 1);
+                $gobi = mb_convert_kana(mb_substr($ftext, -1, 1), "c");
                 insert($ftext, $content, $userId, $gobi);
                 $response = $bot->replyMessage(
                     $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('「'. $content .'」なので次は「'. $gobi . '」からです！')
@@ -60,7 +60,7 @@ foreach ($events as $event) {
         }else{
             //そんな単語存在しません
             $response = $bot->replyMessage(
-                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('単語が見つかりませんでした..ひらがなにしたり、別の単語に変えてください。')  
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('単語が見つかりませんでした..ひらがなやカタカナにしたり、別の単語に変えてください。')  
             );
         }
     } 
