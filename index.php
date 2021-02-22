@@ -37,11 +37,15 @@ foreach ($events as $event) {
         $results = result($userId);
         $reply = "";
         foreach($results as $result){
-            $reply .= "->" .$result['hurigana']. "\n";
+            if($result['hurigana'] == 'しりとり'){
+                $reply .= $result['hurigana']. "\n";
+            }else{
+                $reply .= "->" .$result['hurigana']. "\n";
+            }
         }
         resets($userId);
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果\nしりとり". $reply)
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果\n". $reply)
         );
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
