@@ -9,8 +9,9 @@ $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS
 
 //CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
 $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
+var_dump(result('U4cf5f0d35714875e04f2546295684863'));
 // LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+/*$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
 foreach ($events as $event) {
     $text = $event->getText();
@@ -39,7 +40,12 @@ foreach ($events as $event) {
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
         $content = textChecker($text, $preword);//正しい単語か
-        if(mb_convert_kana(mb_substr($text, -1,1), "c") == 'ん'){
+        if(mb_convert_kana(mb_substr($text, -1,1), "c") == $preword){
+            $response = $bot->replyMessage(
+                $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('「'. $preword .'」で初めてください！')
+            );
+        }
+        else if(mb_convert_kana(mb_substr($text, -1,1), "c") == 'ん'){
             $response = $bot->replyMessage(
                 $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('「ん」で終わってますよ!')
             );
@@ -64,4 +70,4 @@ foreach ($events as $event) {
             );
         }
     } 
-}
+}*/

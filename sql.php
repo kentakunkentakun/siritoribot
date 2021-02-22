@@ -64,3 +64,13 @@ function checkPlay($userId){
         return false;
     }
 }
+function result($userId){
+    $url = parse_url(getenv('DATABASE_URL'));
+    $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+    $pdo = new PDO($dsn, $url['user'], $url['pass']);
+    $sql = 'SELECT hurigana FROM siritori WHERE userid = ? ';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userId]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
