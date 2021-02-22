@@ -41,7 +41,7 @@ foreach ($events as $event) {
         }
         resets($userId);
         $response = $bot->replyMessage(
-            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果")
+            $event->getReplyToken(), new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("お疲れ様でした！\n結果->\n". $reply)
         );
     }else{//しりとり中
         $preword = prword($userId);// 次の頭文字
